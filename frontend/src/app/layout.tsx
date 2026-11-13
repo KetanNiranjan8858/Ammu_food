@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SiteContentProvider } from "@/context/SiteContentContext";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Ammu Foods | 100% Pure Kashmiri Saffron (Grade-1 Mongra) - ₹350/1g",
@@ -42,6 +43,7 @@ export default function RootLayout({
         <SiteContentProvider>
           {children}
         </SiteContentProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
