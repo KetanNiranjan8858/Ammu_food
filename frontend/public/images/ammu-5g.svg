@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="ambientGlow5" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#881337" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#120F0D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldCap5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#8C6D1F"/>
+    </linearGradient>
+    <linearGradient id="saffronThread5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3B30"/>
+      <stop offset="50%" stop-color="#C41C1C"/>
+      <stop offset="100%" stop-color="#7A0C16"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="250" cy="260" r="220" fill="url(#ambientGlow5)"/>
+  <ellipse cx="250" cy="430" rx="160" ry="25" fill="#000000" opacity="0.6"/>
+
+  <!-- Wider 5g Gourmet Hexagon/Round Container -->
+  <rect x="110" y="160" width="280" height="250" rx="40" fill="#1C1514" stroke="#D4AF37" stroke-width="3"/>
+  <rect x="130" y="200" width="240" height="180" rx="25" fill="#2A0F13" stroke="#881337" stroke-width="2"/>
+  
+  <g stroke="url(#saffronThread5)" stroke-width="3.5" stroke-linecap="round" fill="none">
+    <path d="M160 350 Q 180 290 230 260 Q 250 240 280 230" />
+    <path d="M190 360 Q 210 300 250 270 Q 280 250 310 240" />
+    <path d="M220 370 Q 240 310 280 280 Q 310 260 330 250" />
+    <path d="M260 360 Q 280 320 300 290" />
+  </g>
+
+  <!-- Gold Embossed Label -->
+  <rect x="150" y="275" width="200" height="75" rx="10" fill="#140E0D" stroke="#D4AF37" stroke-width="2"/>
+  <text x="250" y="300" text-anchor="middle" font-family="serif" font-size="18" font-weight="bold" fill="#FDD835" letter-spacing="4">AMMU</text>
+  <text x="250" y="320" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="#D4AF37" letter-spacing="2">ROYAL GOURMET PACK</text>
+  <text x="250" y="338" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#FFFFFF" opacity="0.9">GRADE-1 &bull; NET WT: 5g</text>
+
+  <rect x="135" y="115" width="230" height="55" rx="16" fill="url(#goldCap5)" stroke="#FFF8E1" stroke-width="1"/>
+  <line x1="145" y1="142" x2="355" y2="142" stroke="#8C6D1F" stroke-width="2" opacity="0.5"/>
+</svg>
+

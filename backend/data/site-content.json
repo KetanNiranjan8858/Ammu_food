@@ -1,0 +1,572 @@
+{
+  "theme": {
+    "activeTheme": "traditional",
+    "showFestiveMandalas": true,
+    "seasonalGreeting": "Festive Season Authentic Kashmir Harvest • 100% Pure Mongra",
+    "festivalName": "Festival Special"
+  },
+  "company": {
+    "name": "Ammu Foods",
+    "brandTitle": "Ammu - Leading Dried Fruit",
+    "tagline": "100% Pure Kashmiri Saffron (Kesar)",
+    "manufacturer": "Infinity Food Consumer",
+    "address": "JDA Market Veerangana Nagar Medical Jhansi - 284128, Uttar Pradesh, India",
+    "fssaiLicense": "22720559000206",
+    "email": "ketansinghniranjan24@gmail.com",
+    "secondaryEmail": "ammuonline21@gmail.com",
+    "phone": "+91 8090060273",
+    "rawPhone": "8090060273",
+    "whatsappNumber": "8090060273",
+    "helpDesk": "+91-78944561230",
+    "defaultCurrency": "₹",
+    "logo": "/uploads/1794559127234_5j7a1_Screenshot_2026-11-13_140830.png"
+  },
+  "hero": {
+    "badge": "100% Pure Saffron • FSSAI Lic. 22720559000206",
+    "title": "Pure Kashmiri Kesar",
+    "titleHighlight": "Grade A++ Saffron Threads",
+    "description": "Handpicked from Kashmir Valley and packaged by Infinity Food Consumer. Zero added colors, zero preservatives, and intense natural aroma for pregnancy milk, royal culinary dishes, and daily wellness.",
+    "dealBadge": "Top Rated On Meesho",
+    "dealTitle": "AMMu Gold Kashmiri Kesar (1g)",
+    "dealSubtitle": "A++ Grade Saffron • Sealed Heritage Gold Tin Box",
+    "dealPrice": 378,
+    "dealOriginalPrice": 599,
+    "dealDiscount": "37% OFF Deal",
+    "keyPoints": [
+      "NO Added Color/Fragrance",
+      "Harvested in Kashmir",
+      "Airtight Freshness Tin"
+    ],
+    "meeshoLink": "https://www.meesho.com/search?q=AMMu%20Gold%20Kashmiri%20Kesar%20Saffron",
+    "amazonLink": "https://www.amazon.in/s?k=AMMu+Gold+Kashmiri+Kesar+Saffron",
+    "flipkartLink": "https://www.flipkart.com/search?q=AMMu+Gold+Kashmiri+Kesar+Saffron",
+    "heroImage": "/images/ammu-gold-tin.webp"
+  },
+  "trustBadges": [
+    {
+      "title": "Grade-1 Certified",
+      "subtitle": "ISO 3632 Standard with 240+ Crocin color strength"
+    },
+    {
+      "title": "100% Pure Mongra",
+      "subtitle": "Only dark crimson stigmas, zero yellow filler"
+    },
+    {
+      "title": "Dawn Handpicked",
+      "subtitle": "Harvested at first light to preserve volatile aromas"
+    },
+    {
+      "title": "Moisture Sealed",
+      "subtitle": "Airtight containers protecting delicate essential oils"
+    },
+    {
+      "title": "Direct Pan-India",
+      "subtitle": "Fast, insured shipping with live tracking updates"
+    }
+  ],
+  "products": [
+    {
+      "id": "ammu-gold-tin-1g",
+      "name": "AMMu Gold Kashmiri Kesar Saffron A++ for Flavor & Aroma, Ideal For Cooking & Sweets (1 g)",
+      "weight": "1 Gram",
+      "price": 378,
+      "originalPrice": 599,
+      "badge": "Best Seller",
+      "popular": true,
+      "description": "Model Name\nGold Kashmiri Kesar Saffron A++ for Flavor & Aroma, Ideal For Cooking & Sweets",
+      "features": [
+        "Airtight golden freshness tin",
+        "Form Factor Flakes",
+        "FSSAI Lic. 22720559000206",
+        "Type Saffron/Kesar"
+      ],
+      "image": "/images/ammu-gold-tin.webp",
+      "images": [
+        "/images/ammu-gold-tin.webp",
+        "/images/ammu-nutrition-facts.webp",
+        "/uploads/1794558858300_q2rfn_1-gold-kashmiri-kesar-saffron-a-for-flavor-aroma-ideal-for-original-imahdzqhssmggcqe.webp"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/ammu-gold-kashmiri-kesarsaffronlachhamongra-for-immunity-booster-1g/p/8vea8q",
+        "amazon": "",
+        "flipkart": "https://www.flipkart.com/ammu-gold-kashmiri-kesar-saffron-a-flavor-aroma-ideal-cooking-sweets/p/itme56bcd10b1035?pid=SCMHBR9J5H6VBF6G&lid=LSTSCMHBR9J5H6VBF6GD6YMKU&marketplace=FLIPKART&q=ammu+ssaffron&store=search.flipkart.com&srno=s_1_14&otracker=search&otracker1=search&fm=Search&iid=f9ed385c-356e-49b2-b168-3ef19cd424aa.SCMHBR9J5H6VBF6G.SEARCH&ppt=sp&ppn=sp&qH=43830578dc1d6b30&ov_redirect=true&ov_redirect=true"
+      },
+      "category": "ammu-gold",
+      "commonName": "AMMu Gold",
+      "showOnLandingPage": true
+    },
+    {
+      "id": "ammu-acrylic-pot-1g",
+      "name": "AMMu Pure Kashmiri Saffron (1g Pot)",
+      "weight": "1 Gram",
+      "price": 347,
+      "originalPrice": 499,
+      "badge": "Daily Wellness",
+      "popular": false,
+      "description": "Compact crystal acrylic jewel pot with airtight golden rim. Perfect for daily milk, skin glow, and Ayurvedic health routines.",
+      "features": [
+        "Moisture-lock acrylic jewel pot",
+        "Ideal for daily wellness & pregnancy milk",
+        "Natural deep saffron aroma (safranal)",
+        "100% zero adulteration guarantee"
+      ],
+      "image": "/images/ammu-round-acrylic-jar.webp",
+      "images": [
+        "/images/ammu-round-acrylic-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Pure+Saffron+1g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Pure+Saffron+1g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Pure+Saffron+1g"
+      },
+      "category": "ammu-pure",
+      "commonName": "AMMu Pure Pot",
+      "showOnLandingPage": true
+    },
+    {
+      "id": "ammu-kashmir-ki-rani-1g",
+      "name": "AMMu Kashmir Ki Rani (1g Hex Jar)",
+      "weight": "1 Gram",
+      "price": 365,
+      "originalPrice": 525,
+      "badge": "Royal Edition",
+      "popular": false,
+      "description": "Hand-selected long crimson threads in a traditional hexagonal glass flacon with golden lid. Known as Kashmir ki Rani for unmatched flavor.",
+      "features": [
+        "Luxury hexagonal glass jar with gold lid",
+        "Extra-long unbroken Mongra threads",
+        "Ideal for royal biryanis & festive sweets",
+        "Includes sealed freshness inner cap"
+      ],
+      "image": "/images/ammu-kashmir-ki-rani-jar.webp",
+      "images": [
+        "/images/ammu-kashmir-ki-rani-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Kashmir+ki+Rani+Saffron",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Kashmir+ki+Rani+Saffron",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Kashmir+ki+Rani+Saffron"
+      },
+      "category": "kashmir-ki-rani",
+      "commonName": "Kashmir Ki Rani",
+      "showOnLandingPage": true
+    },
+    {
+      "id": "ammu-twin-pack-2g",
+      "name": "AMMu Twin Pack (2 x 1g)",
+      "weight": "2 Grams (2 x 1g)",
+      "price": 599,
+      "originalPrice": 850,
+      "badge": "Value Twin Pack",
+      "popular": true,
+      "description": "Twin pack of sealed 1g jars offering higher value for regular households, wellness rituals, and culinary connoisseurs. Save 30%.",
+      "features": [
+        "Two individually sealed 1g containers",
+        "Customer Rating: 4.3 ★ (Verified Buyer Reviews)",
+        "High crocin color release in seconds",
+        "Pan-India express dispatch"
+      ],
+      "image": "/images/ammu-round-acrylic-jar.webp",
+      "images": [
+        "/images/ammu-round-acrylic-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Kashmiri+Kesar+pack+of+2",
+        "amazon": "",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Kashmiri+Kesar+pack+of+2"
+      },
+      "category": "multipack",
+      "commonName": "Twin Pack",
+      "showOnLandingPage": true
+    },
+    {
+      "id": "ammu-triple-pack-3g",
+      "name": "AMMu Gold Family Pack (3 x 1g)",
+      "weight": "3 Grams (3 x 1g)",
+      "price": 899,
+      "originalPrice": 1350,
+      "badge": "Family Saver",
+      "popular": false,
+      "description": "Triple 1g airtight pack providing 3 months of daily health, immunity milk, and gourmet cooking. Sealed independently for sustained freshness.",
+      "features": [
+        "Three individual sealed airtight tins (3 x 1g)",
+        "Substantial bulk savings per gram",
+        "Rich in bioactive antioxidants & crocin",
+        "Certified Pampore single-harvest"
+      ],
+      "image": "/images/ammu-gold-tin.webp",
+      "images": [
+        "/images/ammu-gold-tin.webp",
+        "/images/ammu-1g.svg",
+        "/images/ammu-nutrition-facts.webp"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Gold+Saffron+3g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Gold+Saffron+3g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Gold+Saffron+3g"
+      },
+      "category": "multipack",
+      "commonName": "AMMu Gold",
+      "showOnLandingPage": false
+    },
+    {
+      "id": "ammu-quad-pack-4g",
+      "name": "AMMu Super Saver Pack (4 x 1g)",
+      "weight": "4 Grams (4 x 1g)",
+      "price": 1179,
+      "originalPrice": 1799,
+      "badge": "Super Saver",
+      "popular": false,
+      "description": "Economical 4-pack bundle designed for joint families, pooja rituals, and frequent kitchen use. Freshness sealed in individual compartments.",
+      "features": [
+        "4 individual 1g freshness-sealed units",
+        "Cost effective per gram rate",
+        "Tested pure: zero synthetic dyes",
+        "Complimentary insured delivery"
+      ],
+      "image": "/images/ammu-round-acrylic-jar.webp",
+      "images": [
+        "/images/ammu-round-acrylic-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Kashmiri+Kesar+4g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Kashmiri+Kesar+4g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Kashmiri+Kesar+4g"
+      },
+      "category": "multipack",
+      "commonName": "Multi-Packs",
+      "showOnLandingPage": false
+    },
+    {
+      "id": "ammu-penta-pack-5g",
+      "name": "AMMu Connoisseur Set (5 x 1g)",
+      "weight": "5 Grams (5 x 1g)",
+      "price": 1449,
+      "originalPrice": 2250,
+      "badge": "Festive Special",
+      "popular": true,
+      "description": "Exquisite 5g festive multi-pack. Makes a prestigious, healthy gift for Diwali, weddings, Eid, and housewarming ceremonies.",
+      "features": [
+        "5 x 1g individual luxury sealed jars",
+        "Includes authentic purity test certificate",
+        "Ideal for wedding & corporate gifting",
+        "Long shelf life: best before 36 months"
+      ],
+      "image": "/images/ammu-kashmir-ki-rani-jar.webp",
+      "images": [
+        "/images/ammu-kashmir-ki-rani-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Saffron+5g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Saffron+5g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Saffron+5g"
+      },
+      "category": "multipack",
+      "commonName": "Multi-Packs",
+      "showOnLandingPage": false
+    },
+    {
+      "id": "ammu-culinary-reserve-10g",
+      "name": "AMMu Chef Reserve (10g Tin)",
+      "weight": "10 Grams",
+      "price": 2799,
+      "originalPrice": 4200,
+      "badge": "Chefs Choice",
+      "popular": false,
+      "description": "Special 10g reserve edition for professional pastry chefs, master caterers, and luxury dining kitchens requiring intense aroma and deep golden color.",
+      "features": [
+        "10g bulk canister with airtight inner seal",
+        "Highest certified crocin and safranal levels",
+        "Wholesale tier value for commercial kitchens",
+        "Official batch test certificate included"
+      ],
+      "image": "/images/ammu-gold-tin.webp",
+      "images": [
+        "/images/ammu-gold-tin.webp",
+        "/images/ammu-1g.svg",
+        "/images/ammu-nutrition-facts.webp"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Saffron+10g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Saffron+10g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Saffron+10g"
+      },
+      "category": "bulk",
+      "commonName": "AMMu Gold",
+      "showOnLandingPage": false
+    },
+    {
+      "id": "ammu-commercial-pack-25g",
+      "name": "AMMu Catering Pack (25g Tub)",
+      "weight": "25 Grams",
+      "price": 6499,
+      "originalPrice": 9500,
+      "badge": "Wholesale Tier",
+      "popular": false,
+      "description": "Commercial wholesale pack for sweet confectioners (halwais), high-end catering, and bulk consumers. GST invoice and lab certificate provided.",
+      "features": [
+        "25g food-grade commercial tamper-proof tub",
+        "Ideal for mawa sweets, biryanis, & ice creams",
+        "GST invoice provided for business tax credit",
+        "Direct batch dispatch from Jhansi packaging facility"
+      ],
+      "image": "/images/ammu-round-acrylic-jar.webp",
+      "images": [
+        "/images/ammu-round-acrylic-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Saffron+25g",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Saffron+25g",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Saffron+25g"
+      },
+      "category": "bulk",
+      "commonName": "Bulk Commercial",
+      "showOnLandingPage": false
+    },
+    {
+      "id": "ammu-royal-bridal-hamper",
+      "name": "AMMu Royal Shahi Gift Box (5g + Bowls)",
+      "weight": "Luxury Gift Box (5g + Brass Bowls)",
+      "price": 1999,
+      "originalPrice": 2999,
+      "badge": "Luxury Gift Box",
+      "popular": true,
+      "description": "Magnificent bespoke gift hamper featuring 5g of Grade A++ Kashmiri Kesar in glass jars, two artisanal embossed golden brass bowls, and a certificate of purity.",
+      "features": [
+        "Velvet-lined royal gift box with gold foil lettering",
+        "2 handcrafted antique brass dipping bowls",
+        "Includes 5g authentic Pampore saffron",
+        "Unconditional replacement guarantee"
+      ],
+      "image": "/images/ammu-kashmir-ki-rani-jar.webp",
+      "images": [
+        "/images/ammu-kashmir-ki-rani-jar.webp",
+        "/images/ammu-1g.svg"
+      ],
+      "links": {
+        "meesho": "https://www.meesho.com/search?q=AMMu+Royal+Saffron+Gift+Box",
+        "amazon": "https://www.amazon.in/s?k=AMMu+Royal+Saffron+Gift+Box",
+        "flipkart": "https://www.flipkart.com/search?q=AMMu+Royal+Saffron+Gift+Box"
+      },
+      "category": "bulk",
+      "commonName": "Kashmir Ki Rani",
+      "showOnLandingPage": false
+    }
+  ],
+  "bulkBanner": {
+    "badge": "Wholesale, Commercial & Wedding Gifting",
+    "title": "Need Bulk Saffron (25g to 1kg+) or Custom Hampers?",
+    "description": "We supply sweet makers, hotels, fine dining restaurants, and corporate festive gifts with batch lab reports, GST invoices, and wholesale pricing."
+  },
+  "whyAmmu": {
+    "badge": "The AMMu Standard",
+    "title": "Why Discerning Chefs & Families Choose AMMu yeeee",
+    "subtitle": "In an industry flooded with adulterated threads, plastic imitations, and dyed corn silk, AMMu Foods stands for absolute uncompromising purity.",
+    "ammuCard": {
+      "title": "AMMu Pure Kashmiri Saffron",
+      "subtitle": "100% Grade A++ Mongra Stigmas",
+      "points": [
+        {
+          "title": "All-Red Mongra Threads",
+          "desc": "We discard the yellow and white base (style) which has zero coloring power, giving you only pure active stigmas."
+        },
+        {
+          "title": "Slow Release Golden Infusion",
+          "desc": "Releases a rich golden-yellow tint gradually in warm milk/water without instantly turning blood red."
+        },
+        {
+          "title": "Intense Floral Aroma",
+          "desc": "Earthy, sweet hay-like scent that naturally fills the room without artificial chemical essences."
+        },
+        {
+          "title": "Affordable Transparency",
+          "desc": "Transparent pricing direct from harvest to consumers on Meesho, Amazon, and Flipkart."
+        }
+      ]
+    },
+    "marketCard": {
+      "title": "Ordinary Commercial Brands",
+      "subtitle": "Adulterated or Heavily Diluted",
+      "points": [
+        {
+          "title": "Packed with Yellow Waste",
+          "desc": "Often filled with 40-50% yellow stems to artificially bulk up weight.xfgg"
+        },
+        {
+          "title": "Artificially Dyed",
+          "desc": "Stains water instantly bright red within 3 seconds due to synthetic chemical colorings."
+        },
+        {
+          "title": "Oiled or Moistened",
+          "desc": "Sprayed with oil or sugar syrup to increase scale weight at the buyer's expense."
+        },
+        {
+          "title": "Overpriced Middlemen",
+          "desc": "Inflated brand markups passing through 4-5 layers of distributors."
+        }
+      ]
+    }
+  },
+  "nutrition": {
+    "badge": "Certified Purity & Compliance",
+    "title": "Nutritional Facts & Lab Certification",
+    "description": "Every batch of AMMu Saffron complies with strict FSSAI safety norms. 100% pure saffron stigmas with zero added colors, zero preservatives, and zero artificial fragrance.",
+    "labelNote": "Official Pack Label • FSSAI Lic. 22720559000206",
+    "guaranteeTitle": "Pure Stigmas, Grown in Kashmir Valley",
+    "guaranteeText": "Packaged by Infinity Food Consumer under rigorous hygiene and moisture-controlled conditions to protect the delicate Crocin, Safranal, and Picrocrocin compounds.",
+    "checklist": [
+      "NO Added Color",
+      "NO Preservatives",
+      "NO Fragrance",
+      "Allergens: NONE"
+    ]
+  },
+  "purityGuide": {
+    "badge": "Lab & Home Verification",
+    "title": "How to Test Saffron Purity at Home",
+    "subtitle": "We are so confident in the absolute purity of AMMu Foods Saffron that we encourage every customer to perform these simple tests the moment their package arrives.",
+    "tests": [
+      {
+        "title": "1. The Cold Water Test",
+        "badge": "Most Accurate",
+        "summary": "Drop 3-4 AMMu saffron threads into a glass of cold water.",
+        "pureResult": "Pure saffron takes 10 to 15 minutes to release its hue, turning the water into an ethereal golden-yellow / amber shade. The original thread remains intact and crimson red.",
+        "fakeResult": "Fake or dyed saffron turns the water deep red immediately within seconds, and the threads turn white or lose their color."
+      },
+      {
+        "title": "2. The Baking Soda Test",
+        "badge": "Chemical Proof",
+        "summary": "Mix a pinch of baking soda into water, then add a thread of saffron.",
+        "pureResult": "Genuine saffron will maintain a clean, vibrant golden yellow liquid.",
+        "fakeResult": "Artificially dyed threads react with alkaline baking soda and turn a murky red or brown color."
+      },
+      {
+        "title": "3. The Finger Rub Test",
+        "badge": "Texture Verification",
+        "summary": "Soak a thread for 5 minutes, then rub it between two fingers.",
+        "pureResult": "Real saffron thread stays firm, flexible, and does not disintegrate into a paste.",
+        "fakeResult": "Imitation saffron (such as dyed corn silk or plastic) turns to mush or breaks apart instantly."
+      }
+    ]
+  },
+  "benefits": {
+    "badge": "Timeless Applications",
+    "title": "Nourishment for the Body, Magic for the Kitchen",
+    "subtitle": "One single gram of pure AMMu Saffron contains over 400 potent threads, enough for 50+ cups of saffron milk or dozens of celebratory meals.",
+    "items": [
+      {
+        "category": "Wellness & Tradition",
+        "title": "Pregnancy & Daily Saffron Milk",
+        "desc": "A warm cup of saffron milk (Kesar Doodh) is a centuries-old Ayurvedic staple for expectant mothers and daily rejuvenation, supporting digestion and calming the nervous system."
+      },
+      {
+        "category": "Beauty & Radiance",
+        "title": "Glowing Complexion & Skin Health",
+        "desc": "Rich in crocin and vitamins, pure saffron threads nourish cellular health from within, diminishing blemishes and enhancing natural skin luminescence."
+      },
+      {
+        "category": "Gourmet Kitchen",
+        "title": "Royal Biryani, Desserts & Kahwa",
+        "desc": "Just 4-6 threads of AMMu Mongra saffron impart an unmistakable deep golden color and rich aroma to Dum Biryani, Kheer, Rasmalai, and Kashmiri Kahwa tea."
+      },
+      {
+        "category": "Mind & Rest",
+        "title": "Mood Upliftment & Restful Sleep",
+        "desc": "Clinical studies show safranal and crocin assist neurotransmitter balance, helping relieve stress, easing evening restlessness, and promoting restorative deep sleep."
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "q": "How many uses or servings are in a 1-gram pack?",
+      "a": "One gram of pure saffron contains approximately 400 to 450 stigmas. Because authentic Grade A++ Mongra has extreme coloring and flavor potency, only 3–5 threads are needed per serving. A 1g pack comfortably provides 50 to 80 servings of saffron milk or dozens of family culinary dishes."
+    },
+    {
+      "q": "What is the best way to extract maximum flavor and color from saffron?",
+      "a": "Lightly crush 4-5 threads in a mortar or between your fingertips, then steep in 2 tablespoons of warm (not boiling) milk or water for 15–20 minutes before adding to your dish. The liquid will develop an intense golden amber hue and rich aroma."
+    },
+    {
+      "q": "How should I store AMMu saffron to keep it fresh?",
+      "a": "Always store your saffron in its original airtight AMMu container in a cool, dry, dark pantry away from direct sunlight and humidity. Never store saffron in the refrigerator, as condensation can introduce moisture and weaken the aroma."
+    },
+    {
+      "q": "Where can I buy AMMu Saffron online?",
+      "a": "You can purchase AMMu Saffron directly on Meesho, Amazon, and Flipkart with fast Pan-India express delivery and verified buyer protection."
+    },
+    {
+      "q": "Do you supply restaurants, caterers, or wedding gift orders in bulk?",
+      "a": "Absolutely. We supply certified bulk saffron from 25 grams up to multi-kilogram lots with batch lab reports and GST invoices. You can submit an inquiry through our form below."
+    }
+  ],
+  "inquiry": {
+    "badge": "Official Saffron Inquiry Desk",
+    "title": "Have a Question or Need a Custom Order?",
+    "subtitle": "Whether you want a quick trial pack for home use, wedding favors, or wholesale supplies for your restaurant or sweet shop, submit your request below.",
+    "responseSpeedText": "Typically responds in 15–30 minutes"
+  },
+  "productFilters": [
+    {
+      "id": "all",
+      "label": "All Products"
+    },
+    {
+      "id": "ammu-gold",
+      "label": "AMMu Gold"
+    },
+    {
+      "id": "kashmir-ki-rani",
+      "label": "Kashmir Ki Rani"
+    },
+    {
+      "id": "ammu-pure",
+      "label": "AMMu Pure Pot"
+    },
+    {
+      "id": "multipack",
+      "label": "Multi-Packs (2g–5g)"
+    },
+    {
+      "id": "bulk",
+      "label": "Bulk & Gifting"
+    }
+  ],
+  "reviews": {
+    "badge": "Verified Customer Feedback • 4 / 5.0 Star Rating",
+    "title": "Trusted by Over 1,450+ Connoisseurs & Families",
+    "subtitle": "Read genuine feedback from mothers, master chefs, and saffron connoisseurs across India who experienced authentic AMMu Kashmiri Mongra purity.",
+    "averageRating": 4,
+    "totalReviewsCount": "1,450+ Verified Reviews",
+    "externalReviewLink": "#inquiry",
+    "externalReviewLinkText": "Submit Your Customer Review",
+    "items": [
+      {
+        "id": "rev-5",
+        "name": "Meera Venkatraman",
+        "location": "Indiranagar, Bengaluru",
+        "rating": 3,
+        "title": "Purest Saffron I've Found in India — Worth Every Rupee",
+        "comment": "Did the baking soda test: the solution turned golden yellow instead of murky reddish. That is the hallmark of real Kashmiri kesar. Great pricing at ₹350–₹378 compared to overpriced pharmacy brands that sell Grade-3 quality. Will be ordering the 5g pack next.",
+        "productName": "AMMu Family Reserve (5g Tin)",
+        "verified": true,
+        "date": "20 Oct 2026"
+      },
+      {
+        "id": "rev-6",
+        "name": "Siddharth Verma",
+        "location": "Gomti Nagar, Lucknow",
+        "rating": 5,
+        "title": "Authentic Pampore Harvest — Zero Yellow Waste Fibers",
+        "comment": "Every single thread in the jar is pure deep crimson stigma. No yellow styles or broken dust used as weight filler. Verified the FSSAI license on the pack and it matches Infinity Food Consumer. Excellent honest Indian brand.",
+        "productName": "AMMu Gourmet Saffron (1g Tin)",
+        "verified": true,
+        "date": "15 Oct 2026"
+      }
+    ]
+  }
+}

@@ -1,0 +1,427 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 245, 240, 235;
+  --background-rgb: 18, 15, 13;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #120F0D;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #0E0C0A;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #D4AF37, #881337);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FDD835;
+}
+
+/* Typography styles: Formal Serif & Casual Sans */
+.font-display {
+  font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+}
+
+.font-casual {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Gradient texts */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF0B3 0%, #F5C518 40%, #D4AF37 70%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.crimson-gradient-text {
+  background: linear-gradient(135deg, #FF6B8B 0%, #D81B60 40%, #881337 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Glow effects */
+.shadow-gold-glow {
+  box-shadow: 0 0 20px -4px rgba(212, 175, 55, 0.22);
+}
+
+.shadow-crimson-glow {
+  box-shadow: 0 0 20px -4px rgba(184, 28, 28, 0.22);
+}
+
+.shadow-card-hover {
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7), 0 0 20px -3px rgba(212, 175, 55, 0.18);
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(0.8deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.02); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-effect::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 4s infinite;
+  pointer-events: none !important;
+}
+
+/* Ensure all elements with pointer-events-none and their descendants never capture mouse events */
+.pointer-events-none,
+.pointer-events-none * {
+  pointer-events: none !important;
+}
+
+@keyframes badgeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.animate-badge {
+  animation: badgeBounce 3s ease-in-out infinite;
+}
+
+/* ========================================================
+   REFINED, BALANCED & SMOOTH HOVER EFFECTS SYSTEM
+   (Calibrated for gentle luxury feel, reduced speed & intensity)
+   ======================================================== */
+
+/* 1. Global Card Hover with Gentle Depth & Controlled Elevation */
+.card-hover-effect {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.4s ease, 
+              box-shadow 0.5s ease, 
+              background-color 0.4s ease;
+  will-change: transform, box-shadow;
+}
+.card-hover-effect:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.65), 
+              0 0 18px rgba(212, 175, 55, 0.15);
+}
+
+/* 2. Micro Hover Lift for Pills, Chips, Small Badges & Tiles */
+.hover-lift {
+  transition: transform 0.35s ease, 
+              box-shadow 0.35s ease, 
+              border-color 0.35s ease,
+              background-color 0.35s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 18px -4px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+/* 3. Navigation Links with Luxury Expanding Gold Underline */
+.nav-link-hover {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #D4AF37, #FDD835);
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.nav-link-hover:hover {
+  color: #FDD835;
+}
+.nav-link-hover:hover::after {
+  width: 100%;
+}
+
+/* 4. Interactive List & Table Row Slide-Highlight */
+.hover-row-highlight {
+  transition: background-color 0.35s ease, 
+              transform 0.35s ease, 
+              border-color 0.35s ease;
+}
+.hover-row-highlight:hover {
+  background-color: rgba(45, 25, 30, 0.45);
+  transform: translateX(2px);
+  border-left-color: rgba(212, 175, 55, 0.55) !important;
+}
+
+/* 5. Marketplace Button Hover System (Calm & Balanced) */
+.meesho-hover-btn {
+  transition: all 0.35s ease;
+}
+.meesho-hover-btn:hover {
+  background-color: #68173e !important;
+  border-color: rgba(255, 105, 180, 0.6) !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 105, 180, 0.2);
+}
+.meesho-hover-btn:active {
+  transform: scale(0.98);
+}
+
+.amazon-hover-btn {
+  transition: all 0.35s ease;
+}
+.amazon-hover-btn:hover {
+  background-color: #293647 !important;
+  border-color: rgba(255, 153, 0, 0.6) !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 153, 0, 0.2);
+}
+.amazon-hover-btn:active {
+  transform: scale(0.98);
+}
+
+.flipkart-hover-btn {
+  transition: all 0.35s ease;
+}
+.flipkart-hover-btn:hover {
+  background-color: #1e3f78 !important;
+  border-color: rgba(255, 229, 0, 0.6) !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.5), 0 0 12px rgba(40, 116, 240, 0.2);
+}
+.flipkart-hover-btn:active {
+  transform: scale(0.98);
+}
+
+/* 6. Gold Button Tactile Feedback (Smooth & Restrained) */
+.gold-btn-hover {
+  transition: all 0.35s ease;
+}
+.gold-btn-hover:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.5), 0 0 16px rgba(212, 175, 55, 0.25);
+}
+.gold-btn-hover:active {
+  transform: scale(0.98);
+}
+
+/* 7. WhatsApp Button Tactile Feedback */
+.whatsapp-btn-hover {
+  transition: all 0.35s ease;
+}
+.whatsapp-btn-hover:hover {
+  background-color: #20BA59 !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.5), 0 0 16px rgba(37, 211, 102, 0.22);
+}
+.whatsapp-btn-hover:active {
+  transform: scale(0.98);
+}
+
+/* 8. Form Inputs Gentle Interactive Glow */
+input, select, textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+input:hover, select:hover, textarea:hover {
+  border-color: rgba(212, 175, 55, 0.35) !important;
+  background-color: rgba(26, 20, 18, 0.95);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #D4AF37 !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.22) !important;
+  background-color: rgba(30, 23, 21, 1);
+  outline: none;
+}
+
+/* 9. Product & Image Gentle Hover Zoom */
+.img-hover-zoom {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+}
+.group:hover .img-hover-zoom {
+  transform: scale(1.025);
+}
+
+/* 10. Subtle Icon Hover */
+.group-hover-icon-zoom {
+  transition: transform 0.4s ease, color 0.3s ease;
+}
+.group:hover .group-hover-icon-zoom {
+  transform: scale(1.06);
+}
+
+/* 11. Subtle Interactive Glow for All Interactive Items */
+button, a {
+  cursor: pointer;
+}
+
+/* ========================================================
+   SEASONAL THEME STYLING SYSTEM (3 Seasonal Color Profiles)
+   ======================================================== */
+
+/* 1. Theme: Traditional Festive & Mandala Heritage */
+.theme-traditional,
+[data-theme="traditional"] {
+  --theme-bg-main: #14080B;
+  --theme-bg-surface: #1E0E12;
+  --theme-bg-card: #251216;
+  --theme-accent-gold: #D4AF37;
+  --theme-accent-highlight: #FDD835;
+  --theme-accent-festive: #881337;
+  --theme-border: rgba(212, 175, 55, 0.45);
+  --theme-border-subtle: rgba(136, 19, 55, 0.5);
+  --theme-glow: rgba(212, 175, 55, 0.25);
+}
+
+/* 2. Theme: Professional Minimalist & Simple Clean Elegance */
+.theme-professional,
+[data-theme="professional"] {
+  --theme-bg-main: #0C0D0E;
+  --theme-bg-surface: #141517;
+  --theme-bg-card: #1B1C1F;
+  --theme-accent-gold: #C5A880;
+  --theme-accent-highlight: #E5E7EB;
+  --theme-accent-festive: #27272A;
+  --theme-border: rgba(255, 255, 255, 0.12);
+  --theme-border-subtle: rgba(255, 255, 255, 0.08);
+  --theme-glow: rgba(255, 255, 255, 0.04);
+}
+
+/* 3. Theme: Daily Harvest & Warm Wellness (Classic AMMu) */
+.theme-daily,
+[data-theme="daily"] {
+  --theme-bg-main: #120F0D;
+  --theme-bg-surface: #1A1412;
+  --theme-bg-card: #221A17;
+  --theme-accent-gold: #D4AF37;
+  --theme-accent-highlight: #F4A261;
+  --theme-accent-festive: #B33010;
+  --theme-border: rgba(212, 175, 55, 0.3);
+  --theme-border-subtle: rgba(179, 48, 16, 0.3);
+  --theme-glow: rgba(212, 175, 55, 0.18);
+}
+
+/* Rotating mandala animations */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 40s linear infinite;
+}
+
+@keyframes spinReverseSlow {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-spin-reverse-slow {
+  animation: spinReverseSlow 55s linear infinite;
+}
+
+/* Professional simple subtle grid pattern */
+.bg-tech-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ========================================================
+   3D FLIP ANIMATION CSS CARD SYSTEM
+   (Compact, Snug Fit, No Extra Empty Space)
+   ======================================================== */
+.flip-card-3d-wrapper {
+  perspective: 1400px;
+  -webkit-perspective: 1400px;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  min-height: 185px;
+  cursor: pointer;
+  border: none !important;
+}
+
+.flip-card-3d-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.4s ease;
+  border-radius: 1.25rem;
+  will-change: transform;
+  border: none !important;
+}
+
+/* Hover & Flipped states: increase size of card and flip 180 degrees in 3D */
+.flip-card-3d-wrapper:hover .flip-card-3d-inner,
+.flip-card-3d-wrapper.is-flipped .flip-card-3d-inner {
+  transform: rotateY(180deg) scale(1.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.22);
+  z-index: 30;
+}
+
+.flip-card-3d-front,
+.flip-card-3d-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Front Face: Strictly only image, completely borderless, fits image ratio perfectly */
+.flip-card-3d-front {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  z-index: 2;
+  border: none !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* Back Face: Details and Order text, compact & snug without extra space */
+.flip-card-3d-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  z-index: 1;
+  border: none !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
+}
+
+

@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "ketansinghniranjan24@gmail.com",
+      "name": "Ketan Singh (Owner)",
+      "passwordHash": "7d61f7af8a5887e675dc8a25c782155fbfcceb268ae34bc4d0e1cecf24336da7",
+      "role": "superadmin"
+    },
+    {
+      "id": "admin-2",
+      "email": "admin@ammufoods.com",
+      "name": "Ammu Master Admin",
+      "passwordHash": "15a33d179dba8fad1e04424c4a1a68acaa8d27bb58475b98cec11400445f1248",
+      "role": "admin"
+    }
+  ],
+  "sessions": {
+    "adm_token_1b00b43a1f390d57582bb86b7afca64e4a692f5add1ad211": {
+      "userId": "admin-1",
+      "email": "ketansinghniranjan24@gmail.com",
+      "expiresAt": 1795166168593
+    },
+    "adm_token_8be9a54407c3a10231acea6f0479f56a6f290d73126861da": {
+      "userId": "admin-1",
+      "email": "ketansinghniranjan24@gmail.com",
+      "expiresAt": 1795172918095
+    }
+  },
+  "resetOtps": {}
+}
