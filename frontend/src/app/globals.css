@@ -332,6 +332,25 @@ button, a {
   --theme-glow: rgba(212, 175, 55, 0.18);
 }
 
+/* 4. Theme: Heritage Ivory (Baby Saffron Luxury Editorial Style) */
+.theme-heritage,
+[data-theme="heritage"] {
+  --theme-bg-main: #FAF7F2;
+  --theme-bg-surface: #F5EFE6;
+  --theme-bg-card: #FFFFFF;
+  --theme-accent-gold: #9E2A2B;
+  --theme-accent-highlight: #7E1F20;
+  --theme-accent-festive: #9E2A2B;
+  --theme-border: rgba(158, 42, 43, 0.22);
+  --theme-border-subtle: rgba(230, 220, 208, 0.95);
+  --theme-glow: rgba(158, 42, 43, 0.12);
+}
+
+.theme-heritage {
+  background-color: #FAF7F2;
+  color: #1E1A18;
+}
+
 /* Rotating mandala animations */
 @keyframes spinSlow {
   from { transform: rotate(0deg); }

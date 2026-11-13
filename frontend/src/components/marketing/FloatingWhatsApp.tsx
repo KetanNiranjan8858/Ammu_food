@@ -21,6 +21,7 @@ export default function FloatingWhatsApp() {
   const [showTooltip, setShowTooltip] = useState(true);
   const { content } = useSiteContent();
   const company = content.company;
+  const isHeritage = content.theme?.activeTheme === "heritage";
 
   const whatsappUrl = `https://wa.me/${company.whatsappNumber || "917303817365"}?text=${encodeURIComponent(
     `Hello ${company.name}! I would like to chat with Customer Support regarding Kashmir Saffron.`
@@ -30,12 +31,16 @@ export default function FloatingWhatsApp() {
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
       {/* Tooltip bubble */}
       {showTooltip && (
-        <div className="relative bg-[#1E1715] border border-[#25D366]/50 text-white text-xs px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2 animate-bounce">
-          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          <span>Chat with Customer Support on WhatsApp</span>
+        <div className={`relative text-xs px-3.5 py-2 rounded-2xl shadow-xl flex items-center gap-2 animate-bounce ${
+          isHeritage
+            ? "bg-white border border-[#EAE3D9] text-[#1E1A18]"
+            : "bg-[#1E1715] border border-[#25D366]/50 text-white"
+        }`}>
+          <span className={`w-2 h-2 rounded-full animate-pulse ${isHeritage ? "bg-[#9E2A2B]" : "bg-[#25D366]"}`} />
+          <span>Chat with Saffron Specialist</span>
           <button
             onClick={() => setShowTooltip(false)}
-            className="text-stone-400 hover:text-white p-0.5 cursor-pointer"
+            className={`p-0.5 cursor-pointer ${isHeritage ? "text-stone-400 hover:text-black" : "text-stone-400 hover:text-white"}`}
             aria-label="Close tooltip"
           >
             <X className="w-3 h-3" />
@@ -43,15 +48,19 @@ export default function FloatingWhatsApp() {
         </div>
       )}
 
-      {/* Floating button */}
+      {/* Floating button (Matches Baby Saffron terracotta chat circle) */}
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Customer Support on WhatsApp"
-        className="whatsapp-btn-hover w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(37,211,102,0.4)] group cursor-pointer"
+        className={`w-13 h-13 rounded-full flex items-center justify-center shadow-lg group cursor-pointer transition duration-300 ${
+          isHeritage
+            ? "bg-[#9E2A2B] hover:bg-[#852324] text-white shadow-[0_10px_25px_rgba(158,42,43,0.35)]"
+            : "whatsapp-btn-hover bg-[#25D366] text-white shadow-[0_10px_25px_rgba(37,211,102,0.4)]"
+        }`}
       >
-        <WhatsAppIcon className="w-8 h-8 fill-white group-hover:rotate-6 group-hover:scale-105 transition-transform duration-500" />
+        <WhatsAppIcon className="w-7 h-7 fill-white group-hover:rotate-6 group-hover:scale-105 transition-transform duration-500" />
       </a>
     </div>
   );

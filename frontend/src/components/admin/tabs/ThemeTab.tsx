@@ -47,6 +47,28 @@ interface ThemeOption {
 
 const THEME_OPTIONS: ThemeOption[] = [
   {
+    id: "heritage",
+    name: "Heritage Ivory (Baby Saffron Style)",
+    tagline: "India's Legacy Saffron House — Pure Cream, Terracotta Red & Editorial Serif Typography",
+    badge: "Baby Saffron Iconic Style",
+    seasonRecommendation: "Legacy Brand Presence, Luxury Connoisseurs & Year-Round Storefront",
+    icon: Crown,
+    colors: {
+      bg: "#FAF7F2",
+      card: "#FFFFFF",
+      accent: "#9E2A2B",
+      highlight: "#1E1A18",
+      glow: "#C86D51",
+    },
+    features: [
+      "Pure warm ivory cream background with warm ambient parchment glow",
+      "Editorial serif typography with rich terracotta red italic accents",
+      "Centered heritage hero layout inspired by Baby Saffron's legacy storefront",
+      "Pill-shaped terracotta call-to-action buttons with soft luxury shadows",
+      "Floating trust banner & circular terracotta chat widget",
+    ],
+  },
+  {
     id: "traditional",
     name: "Traditional & Festive",
     tagline: "Heritage Indian Royal Crimson with Sacred Mandalas",

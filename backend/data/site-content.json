@@ -1,9 +1,9 @@
 {
   "theme": {
-    "activeTheme": "traditional",
-    "showFestiveMandalas": true,
-    "seasonalGreeting": "Festive Season Authentic Kashmir Harvest • 100% Pure Mongra",
-    "festivalName": "Festival Special"
+    "activeTheme": "heritage",
+    "showFestiveMandalas": false,
+    "seasonalGreeting": "India's Legacy Saffron House • ISO 3632 Grade A++ Kashmiri Mongra Kesar",
+    "festivalName": "Heritage Reserve"
   },
   "company": {
     "name": "Ammu Foods",

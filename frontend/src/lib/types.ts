@@ -1,4 +1,4 @@
-export type ThemeMode = "traditional" | "professional" | "daily";
+export type ThemeMode = "traditional" | "professional" | "daily" | "heritage";
 
 export interface ThemeConfig {
   activeTheme: ThemeMode;

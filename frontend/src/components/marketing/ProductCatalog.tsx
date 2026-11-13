@@ -11,8 +11,9 @@ export default function ProductCatalog() {
   const { content } = useSiteContent();
   const products = content.products || [];
   const company = content.company;
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
@@ -71,18 +72,26 @@ export default function ProductCatalog() {
     <section
       id="products"
       ref={sectionRef}
-      className={`py-16 text-white relative transition-colors duration-500 ${
-        isTraditional
-          ? "bg-[#14080B]"
+      className={`py-16 relative transition-colors duration-500 ${
+        isHeritage
+          ? "bg-[#FAF7F2] text-[#1E1A18]"
+          : isTraditional
+          ? "bg-[#14080B] text-white"
           : isProfessional
-          ? "bg-[#0C0D0E]"
-          : "bg-[#120F0D]"
+          ? "bg-[#0C0D0E] text-white"
+          : "bg-[#120F0D] text-white"
       }`}
     >
       {/* Background ambient lighting */}
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-80 rounded-full blur-[140px] pointer-events-none ${
-          isTraditional ? "bg-[#881337]/25" : isProfessional ? "bg-white/[0.02]" : "bg-[#881337]/15"
+          isHeritage
+            ? "bg-[#C86D51]/10"
+            : isTraditional
+            ? "bg-[#881337]/25"
+            : isProfessional
+            ? "bg-white/[0.02]"
+            : "bg-[#881337]/15"
         }`}
       />
 
@@ -96,22 +105,26 @@ export default function ProductCatalog() {
           <div className="space-y-2.5 text-center md:text-left">
             <div
               className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest transition ${
-                isTraditional
+                isHeritage
+                  ? "bg-[#9E2A2B]/10 border border-[#9E2A2B]/30 text-[#9E2A2B]"
+                  : isTraditional
                   ? "bg-[#881337]/60 border border-[#D4AF37]/40 text-[#FDD835] shadow-crimson-glow animate-badge"
                   : isProfessional
                   ? "bg-[#16171B] border border-stone-700 text-stone-200"
                   : "bg-[#881337]/50 border border-[#D4AF37]/30 text-[#FDD835] shadow-crimson-glow animate-badge"
               }`}
             >
-              <Sparkles className={`w-3.5 h-3.5 ${isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
+              <Sparkles className={`w-3.5 h-3.5 ${isHeritage ? "text-[#9E2A2B]" : isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
               <span>Direct From Kashmir Valley &bull; FSSAI Lic. {company.fssaiLicense}</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+            <h2 className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${
+              isHeritage ? "text-[#1E1A18]" : "text-white"
+            }`}>
               Our Certified Saffron Collection
             </h2>
 
-            <p className="text-stone-300 text-sm font-light max-w-xl">
+            <p className={`text-sm font-light max-w-xl ${isHeritage ? "text-[#61554D]" : "text-stone-300"}`}>
               Choose your preferred packaging and buy instantly on verified marketplaces (<strong>Meesho</strong>, <strong>Flipkart</strong>, <strong>Amazon</strong>).
             </p>
           </div>
@@ -120,8 +133,10 @@ export default function ProductCatalog() {
           <div className="flex justify-center md:justify-end flex-shrink-0">
             <a
               href="/products"
-              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider transition duration-300 shadow-sm ${
-                isProfessional
+              className={`inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition duration-300 shadow-sm ${
+                isHeritage
+                  ? "bg-[#9E2A2B] hover:bg-[#852324] text-white shadow-md hover:-translate-y-0.5"
+                  : isProfessional
                   ? "bg-[#E5E7EB] hover:bg-white text-stone-900 border border-stone-300"
                   : "gold-btn-hover bg-gradient-to-r from-[#D4AF37] via-[#F4A261] to-[#E59819] text-black shadow-gold-glow shimmer-effect"
               }`}

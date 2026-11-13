@@ -29,19 +29,21 @@ export default function Home() {
   return (
     <main
       data-theme={activeTheme}
-      className={`min-h-screen text-white relative theme-${activeTheme} ${
-        activeTheme === "traditional"
-          ? "bg-[#14080B]"
+      className={`min-h-screen relative theme-${activeTheme} transition-colors duration-500 ${
+        activeTheme === "heritage"
+          ? "bg-[#FAF7F2] text-[#1E1A18]"
+          : activeTheme === "traditional"
+          ? "bg-[#14080B] text-white"
           : activeTheme === "professional"
-          ? "bg-[#0C0D0E] bg-tech-grid"
-          : "bg-[#120F0D]"
+          ? "bg-[#0C0D0E] bg-tech-grid text-white"
+          : "bg-[#120F0D] text-white"
       }`}
     >
-      {/* Traditional Sacred Mandalas (Festive Theme Background) */}
-      <FestiveMandalaDecor />
+      {/* Traditional Sacred Mandalas (Festive Theme Background only) */}
+      {activeTheme === "traditional" && <FestiveMandalaDecor />}
 
-      {/* Smooth Cursor Following Background Light with Inertia & Delay */}
-      <CursorGlow />
+      {/* Smooth Cursor Following Background Light */}
+      {activeTheme !== "heritage" && <CursorGlow />}
 
       {/* Navigation */}
       <Navbar />

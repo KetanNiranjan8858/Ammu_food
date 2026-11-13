@@ -9,8 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function WhyAmmu() {
   const { content } = useSiteContent();
   const whyAmmu = content.whyAmmu;
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
@@ -58,12 +59,14 @@ export default function WhyAmmu() {
     <section
       id="whyammu"
       ref={sectionRef}
-      className={`py-20 text-white relative overflow-hidden transition-colors duration-500 border-b ${
-        isTraditional
-          ? "bg-[#14060A] border-[#D4AF37]/20"
+      className={`py-20 relative overflow-hidden transition-colors duration-500 border-b ${
+        isHeritage
+          ? "bg-[#F5EFE6] text-[#1E1A18] border-[#E8DFD3]"
+          : isTraditional
+          ? "bg-[#14060A] border-[#D4AF37]/20 text-white"
           : isProfessional
-          ? "bg-[#0C0D0E] border-stone-800"
-          : "bg-[#130E0C] border-[#D4AF37]/15"
+          ? "bg-[#0C0D0E] border-stone-800 text-white"
+          : "bg-[#130E0C] border-[#D4AF37]/15 text-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,51 +75,59 @@ export default function WhyAmmu() {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-14">
           <div
             className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest transition ${
-              isTraditional
+              isHeritage
+                ? "bg-[#9E2A2B]/10 text-[#9E2A2B] border border-[#9E2A2B]/20"
+                : isTraditional
                 ? "bg-[#881337]/50 text-[#FDD835]"
                 : isProfessional
                 ? "bg-[#18191D] text-stone-200"
                 : "bg-[#881337]/40 text-[#FDD835]"
             }`}
           >
-            <Sparkles className={`w-3.5 h-3.5 ${isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
+            <Sparkles className={`w-3.5 h-3.5 ${isHeritage ? "text-[#9E2A2B]" : isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
             <span>{whyAmmu.badge}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h2 className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${
+            isHeritage ? "text-[#1E1A18]" : "text-white"
+          }`}>
             {whyAmmu.title}
           </h2>
-          <p className="text-stone-300 text-sm sm:text-base font-light">
+          <p className={`text-sm sm:text-base font-light ${isHeritage ? "text-[#61554D]" : "text-stone-300"}`}>
             {whyAmmu.subtitle}
           </p>
         </div>
 
-        {/* Comparison: Open Editorial Spread (Heavy Card Containers Removed) */}
+        {/* Comparison: Open Editorial Spread */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 max-w-5xl mx-auto items-start">
           
           {/* Left Column: The AMMu Standard */}
           <div ref={leftCardRef} className="space-y-6">
-            <div className="flex items-center gap-3 pb-3 border-b border-[#D4AF37]/30">
-              <div className="w-9 h-9 rounded-full bg-[#D4AF37] text-black font-serif font-bold text-base flex items-center justify-center flex-shrink-0">
+            <div className={`flex items-center gap-3 pb-3 border-b ${
+              isHeritage ? "border-[#9E2A2B]/30" : "border-[#D4AF37]/30"
+            }`}>
+              <div className={`w-9 h-9 rounded-full font-serif font-bold text-base flex items-center justify-center flex-shrink-0 ${
+                isHeritage ? "bg-[#9E2A2B] text-white" : "bg-[#D4AF37] text-black"
+              }`}>
                 A
               </div>
               <div>
-                <h3 className="font-serif text-xl font-bold text-white">
+                <h3 className={`font-serif text-xl font-bold ${isHeritage ? "text-[#1E1A18]" : "text-white"}`}>
                   {whyAmmu.ammuCard.title}
                 </h3>
-                <p className="text-xs text-[#D4AF37] font-semibold">
+                <p className={`text-xs font-semibold ${isHeritage ? "text-[#9E2A2B]" : "text-[#D4AF37]"}`}>
                   {whyAmmu.ammuCard.subtitle}
                 </p>
               </div>
-              <ShieldCheck className="w-5 h-5 text-emerald-400 ml-auto" />
+              <ShieldCheck className="w-5 h-5 text-emerald-600 ml-auto" />
             </div>
 
-            <div className="space-y-4 text-sm text-stone-200">
+            <div className={`space-y-4 text-sm ${isHeritage ? "text-[#3D342F]" : "text-stone-200"}`}>
               {whyAmmu.ammuCard.points.map((pt, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-1" />
                   <div className="leading-relaxed text-xs sm:text-sm">
-                    <strong className="text-white font-semibold">{pt.title}: </strong>
-                    <span className="text-stone-300">{pt.desc}</span>
+                    <strong className={isHeritage ? "text-[#1E1A18] font-semibold" : "text-white font-semibold"}>{pt.title}: </strong>
+                    <span className={isHeritage ? "text-[#5C544E]" : "text-stone-300"}>{pt.desc}</span>
                   </div>
                 </div>
               ))}
@@ -124,13 +135,17 @@ export default function WhyAmmu() {
           </div>
 
           {/* Right Column: Ordinary Commercial Brands */}
-          <div ref={rightCardRef} className="space-y-6 md:border-l md:border-stone-800/80 md:pl-10 lg:pl-16">
-            <div className="flex items-center gap-3 pb-3 border-b border-stone-800">
-              <div className="w-9 h-9 rounded-full bg-stone-800 text-stone-400 font-serif font-bold text-base flex items-center justify-center flex-shrink-0">
+          <div ref={rightCardRef} className={`space-y-6 md:border-l md:pl-10 lg:pl-16 ${
+            isHeritage ? "md:border-stone-300" : "md:border-stone-800/80"
+          }`}>
+            <div className={`flex items-center gap-3 pb-3 border-b ${
+              isHeritage ? "border-stone-300" : "border-stone-800"
+            }`}>
+              <div className="w-9 h-9 rounded-full bg-stone-300 text-stone-700 font-serif font-bold text-base flex items-center justify-center flex-shrink-0">
                 ✕
               </div>
               <div>
-                <h3 className="font-serif text-xl font-bold text-stone-300">
+                <h3 className={`font-serif text-xl font-bold ${isHeritage ? "text-stone-700" : "text-stone-300"}`}>
                   {whyAmmu.marketCard.title}
                 </h3>
                 <p className="text-xs text-stone-500 font-semibold">
@@ -140,13 +155,13 @@ export default function WhyAmmu() {
               <AlertTriangle className="w-5 h-5 text-rose-500 ml-auto" />
             </div>
 
-            <div className="space-y-4 text-sm text-stone-400">
+            <div className="space-y-4 text-sm text-stone-600">
               {whyAmmu.marketCard.points.map((pt, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <XCircle className="w-4 h-4 text-rose-500/80 flex-shrink-0 mt-1" />
                   <div className="leading-relaxed text-xs sm:text-sm">
-                    <strong className="text-stone-300 font-semibold">{pt.title}: </strong>
-                    <span className="text-stone-400">{pt.desc}</span>
+                    <strong className={isHeritage ? "text-stone-800 font-semibold" : "text-stone-300 font-semibold"}>{pt.title}: </strong>
+                    <span className={isHeritage ? "text-stone-600" : "text-stone-400"}>{pt.desc}</span>
                   </div>
                 </div>
               ))}

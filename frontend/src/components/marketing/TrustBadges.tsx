@@ -9,19 +9,22 @@ const ICONS = [Award, Sparkles, SunMedium, ShieldCheck, Truck];
 export default function TrustBadges() {
   const { content } = useSiteContent();
   const badges = content.trustBadges || [];
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
   return (
     <section
-      className={`py-6 sm:py-8 text-white relative z-10 transition-colors duration-500 border-b border-t ${
-        isTraditional
-          ? "bg-[#16060B]/90 border-[#D4AF37]/20"
+      className={`py-6 sm:py-8 relative z-10 transition-colors duration-500 border-b border-t ${
+        isHeritage
+          ? "bg-[#F3ECE1] border-[#E8DFD3] text-[#1E1A18]"
+          : isTraditional
+          ? "bg-[#16060B]/90 border-[#D4AF37]/20 text-white"
           : isProfessional
-          ? "bg-[#0B0C0E] border-stone-800/80"
-          : "bg-[#140F0D]/90 border-[#D4AF37]/15"
+          ? "bg-[#0B0C0E] border-stone-800/80 text-white"
+          : "bg-[#140F0D]/90 border-[#D4AF37]/15 text-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +40,9 @@ export default function TrustBadges() {
                 {/* Minimalist Floating Icon (No heavy box) */}
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                    isTraditional
+                    isHeritage
+                      ? "bg-[#9E2A2B]/10 text-[#9E2A2B] group-hover:bg-[#9E2A2B] group-hover:text-white"
+                      : isTraditional
                       ? "bg-[#881337]/40 text-[#FDD835] group-hover:bg-[#881337] group-hover:text-white"
                       : isProfessional
                       ? "bg-stone-800/60 text-stone-200 group-hover:bg-stone-700"
@@ -50,14 +55,18 @@ export default function TrustBadges() {
                 <div>
                   <h4
                     className={`text-xs font-bold transition duration-300 leading-tight ${
-                      isProfessional
+                      isHeritage
+                        ? "text-[#1E1A18] group-hover:text-[#9E2A2B]"
+                        : isProfessional
                         ? "text-stone-100 group-hover:text-white"
                         : "text-stone-100 group-hover:text-[#FDD835]"
                     }`}
                   >
                     {b.title}
                   </h4>
-                  <p className="text-[11px] text-stone-400 group-hover:text-stone-300 leading-tight mt-0.5 transition duration-300">
+                  <p className={`text-[11px] leading-tight mt-0.5 transition duration-300 ${
+                    isHeritage ? "text-[#6B6158]" : "text-stone-400 group-hover:text-stone-300"
+                  }`}>
                     {b.subtitle}
                   </p>
                 </div>

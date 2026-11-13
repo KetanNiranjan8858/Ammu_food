@@ -20,15 +20,18 @@ function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
 export default function Footer() {
   const { content } = useSiteContent();
   const company = content.company;
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
   return (
     <footer
       className={`text-stone-400 pt-16 pb-12 relative z-10 transition-colors duration-500 border-t ${
-        isTraditional
+        isHeritage
+          ? "bg-[#1E1A18] text-stone-300 border-[#9E2A2B]/30"
+          : isTraditional
           ? "bg-[#0D0407] border-[#D4AF37]/30"
           : isProfessional
           ? "bg-[#08090B] border-stone-800"

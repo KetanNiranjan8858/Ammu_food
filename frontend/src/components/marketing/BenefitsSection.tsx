@@ -12,8 +12,9 @@ export default function BenefitsSection() {
   const { content } = useSiteContent();
   const benefits = content.benefits;
   const items = benefits.items || [];
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
@@ -49,12 +50,14 @@ export default function BenefitsSection() {
     <section
       id="benefits"
       ref={sectionRef}
-      className={`py-20 text-white relative overflow-hidden transition-colors duration-500 border-b ${
-        isTraditional
-          ? "bg-[#17060B] border-[#D4AF37]/20"
+      className={`py-20 relative overflow-hidden transition-colors duration-500 border-b ${
+        isHeritage
+          ? "bg-[#FAF7F2] text-[#1E1A18] border-[#EAE2D8]"
+          : isTraditional
+          ? "bg-[#17060B] border-[#D4AF37]/20 text-white"
           : isProfessional
-          ? "bg-[#0C0D0E] border-stone-800"
-          : "bg-[#140F0D] border-[#D4AF37]/15"
+          ? "bg-[#0C0D0E] border-stone-800 text-white"
+          : "bg-[#140F0D] border-[#D4AF37]/15 text-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,20 +66,26 @@ export default function BenefitsSection() {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-14">
           <div
             className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest transition ${
-              isTraditional
+              isHeritage
+                ? "bg-[#9E2A2B]/10 text-[#9E2A2B] border border-[#9E2A2B]/20"
+                : isTraditional
                 ? "bg-[#881337]/50 text-[#FDD835]"
                 : isProfessional
                 ? "bg-[#18191D] text-stone-200"
                 : "bg-[#881337]/40 text-[#FDD835]"
             }`}
           >
-            <Heart className={`w-3.5 h-3.5 ${isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
+            <Heart className={`w-3.5 h-3.5 ${isHeritage ? "text-[#9E2A2B]" : isProfessional ? "text-stone-300" : "text-[#D4AF37]"}`} />
             <span>{benefits.badge}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h2 className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight ${
+            isHeritage ? "text-[#1E1A18]" : "text-white"
+          }`}>
             {benefits.title}
           </h2>
-          <p className="text-stone-300 text-sm sm:text-base font-light">
+          <p className={`text-sm sm:text-base font-light ${
+            isHeritage ? "text-[#61554D]" : "text-stone-300"
+          }`}>
             {benefits.subtitle}
           </p>
         </div>
@@ -88,13 +97,19 @@ export default function BenefitsSection() {
             return (
               <div
                 key={idx}
-                className="benefit-card group cursor-default pt-4 border-t border-white/10 hover:border-[#D4AF37] transition-colors duration-400 space-y-3"
+                className={`benefit-card group cursor-default pt-4 border-t transition-colors duration-400 space-y-3 ${
+                  isHeritage
+                    ? "border-stone-300 hover:border-[#9E2A2B]"
+                    : "border-white/10 hover:border-[#D4AF37]"
+                }`}
               >
                 {/* Floating Minimalist Icon & Index Number */}
                 <div className="flex items-center justify-between">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition duration-400 ${
-                      isTraditional
+                      isHeritage
+                        ? "bg-[#9E2A2B]/10 text-[#9E2A2B] group-hover:bg-[#9E2A2B] group-hover:text-white"
+                        : isTraditional
                         ? "bg-[#881337]/40 text-[#FDD835] group-hover:bg-[#881337] group-hover:text-white"
                         : isProfessional
                         ? "bg-stone-800/60 text-stone-200 group-hover:bg-stone-700"
@@ -103,25 +118,33 @@ export default function BenefitsSection() {
                   >
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="font-mono text-xs text-stone-600 group-hover:text-stone-400 transition">
+                  <span className={`font-mono text-xs transition ${
+                    isHeritage ? "text-stone-400 group-hover:text-stone-600" : "text-stone-600 group-hover:text-stone-400"
+                  }`}>
                     0{idx + 1}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-serif text-lg font-bold text-white group-hover:text-[#FDD835] transition duration-300">
+                <h3 className={`font-serif text-lg font-bold transition duration-300 ${
+                  isHeritage ? "text-[#1E1A18] group-hover:text-[#9E2A2B]" : "text-white group-hover:text-[#FDD835]"
+                }`}>
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs text-stone-400 leading-relaxed group-hover:text-stone-300 transition duration-300">
+                <p className={`text-xs leading-relaxed transition duration-300 ${
+                  isHeritage ? "text-[#61554D] group-hover:text-[#1E1A18]" : "text-stone-400 group-hover:text-stone-300"
+                }`}>
                   {item.desc}
                 </p>
 
                 {/* Subtle Category Pill */}
                 {item.category && (
                   <div className="pt-1">
-                    <span className="text-[10px] font-semibold text-[#D4AF37] tracking-wider uppercase">
+                    <span className={`text-[10px] font-semibold tracking-wider uppercase ${
+                      isHeritage ? "text-[#9E2A2B]" : "text-[#D4AF37]"
+                    }`}>
                       {item.category}
                     </span>
                   </div>

@@ -11,8 +11,9 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { content } = useSiteContent();
-  const theme = content.theme || { activeTheme: "traditional" };
-  const activeTheme = theme.activeTheme || "traditional";
+  const theme = content.theme || { activeTheme: "heritage" };
+  const activeTheme = theme.activeTheme || "heritage";
+  const isHeritage = activeTheme === "heritage";
   const isTraditional = activeTheme === "traditional";
   const isProfessional = activeTheme === "professional";
 
@@ -72,7 +73,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             ======================================================== */}
         <div
           className={`flip-card-3d-back rounded-2xl p-3 sm:p-3.5 flex flex-col justify-between transition-colors duration-300 ${
-            isTraditional
+            isHeritage
+              ? "bg-gradient-to-b from-[#FFFDF9] via-[#FAF6F0] to-[#F5EFE6] text-[#1E1A18] border border-[#EAE2D8] shadow-lg"
+              : isTraditional
               ? "bg-gradient-to-b from-[#2B0E16] via-[#1E0A10] to-[#14070B] text-white"
               : isProfessional
               ? "bg-[#18191E] text-stone-100"
@@ -82,7 +85,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Top Info Group */}
           <div>
             <div className="flex items-center justify-between pb-0.5">
-              <span className="text-[10px] font-bold tracking-wider uppercase text-[#FDD835]">
+              <span className={`text-[10px] font-bold tracking-wider uppercase ${
+                isHeritage ? "text-[#9E2A2B]" : "text-[#FDD835]"
+              }`}>
                 {product.commonName || "AMMu Pure Kashmiri Kesar"}
               </span>
 
@@ -92,7 +97,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                   e.stopPropagation();
                   toggleFlip();
                 }}
-                className="inline-flex items-center gap-1 text-[10px] text-stone-400 hover:text-[#D4AF37] px-2 py-0.5 rounded bg-black/40 transition"
+                className={`inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded transition ${
+                  isHeritage
+                    ? "text-stone-600 hover:text-[#9E2A2B] bg-stone-200/70"
+                    : "text-stone-400 hover:text-[#D4AF37] bg-black/40"
+                }`}
                 title="Flip back to image"
               >
                 <RotateCw className="w-2.5 h-2.5" />
@@ -101,30 +110,42 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
 
             {/* Product Title on Back */}
-            <h3 className="font-serif text-xs sm:text-sm font-bold text-white tracking-wide leading-snug line-clamp-2 mt-1">
+            <h3 className={`font-serif text-xs sm:text-sm font-bold tracking-wide leading-snug line-clamp-2 mt-1 ${
+              isHeritage ? "text-[#1E1A18]" : "text-white"
+            }`}>
               {product.name}
             </h3>
 
             {/* Price Row with Discount Badge & Weight */}
             <div className="flex items-baseline gap-2 pt-1">
-              <span className="text-lg sm:text-xl font-extrabold text-[#FDD835] font-serif tracking-tight">
+              <span className={`text-lg sm:text-xl font-extrabold font-serif tracking-tight ${
+                isHeritage ? "text-[#9E2A2B]" : "text-[#FDD835]"
+              }`}>
                 ₹{product.price}
               </span>
-              <span className="text-xs line-through text-stone-500">
+              <span className="text-xs line-through text-stone-400">
                 ₹{product.originalPrice}
               </span>
-              <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded-full">
+              <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                isHeritage ? "text-emerald-800 bg-emerald-100" : "text-emerald-400 bg-emerald-950/80"
+              }`}>
                 {discountPercent}% OFF
               </span>
-              <span className="text-xs text-stone-300 font-semibold ml-auto">
+              <span className={`text-xs font-semibold ml-auto ${
+                isHeritage ? "text-stone-600" : "text-stone-300"
+              }`}>
                 {product.weight}
               </span>
             </div>
           </div>
 
           {/* Bottom Order Links: TEXT-ONLY ORDER LINKS (Meesho, Flipkart, Amazon) */}
-          <div className="pt-1.5 border-t border-white/10 flex items-center justify-between text-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
+          <div className={`pt-1.5 border-t flex items-center justify-between text-xs ${
+            isHeritage ? "border-stone-300/80" : "border-white/10"
+          }`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${
+              isHeritage ? "text-stone-600" : "text-stone-400"
+            }`}>
               Order On:
             </span>
 
