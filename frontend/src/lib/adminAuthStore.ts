@@ -24,19 +24,15 @@ interface AuthData {
 
 const DATA_DIR = path.join(process.cwd(), "src", "data");
 const AUTH_FILE = path.join(DATA_DIR, "admin-auth.json");
+const JWT_SECRET = process.env.ADMIN_SESSION_SECRET || "ammu_foods_secure_session_secret_2026";
 
 function hashPassword(password: string): string {
   return crypto.createHash("sha256").update(password.trim()).digest("hex");
 }
 
-function ensureAuthFile(): AuthData {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-
+function getDefaultAuthData(): AuthData {
   const defaultHash = hashPassword("AmmuKesar@2026");
-
-  const defaultData: AuthData = {
+  return {
     users: [
       {
         id: "admin-1",
@@ -56,34 +52,46 @@ function ensureAuthFile(): AuthData {
     sessions: {},
     resetOtps: {},
   };
+}
 
-  if (!fs.existsSync(AUTH_FILE)) {
-    fs.writeFileSync(AUTH_FILE, JSON.stringify(defaultData, null, 2), "utf8");
-    return defaultData;
-  }
+// In-memory fallback for serverless read-only filesystem
+let inMemoryAuthData: AuthData = getDefaultAuthData();
 
+function ensureAuthFile(): AuthData {
   try {
+    if (!fs.existsSync(DATA_DIR)) {
+      try {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      } catch (e) {}
+    }
+
+    if (!fs.existsSync(AUTH_FILE)) {
+      try {
+        fs.writeFileSync(AUTH_FILE, JSON.stringify(inMemoryAuthData, null, 2), "utf8");
+      } catch (e) {}
+      return inMemoryAuthData;
+    }
+
     const raw = fs.readFileSync(AUTH_FILE, "utf8");
     const parsed = JSON.parse(raw);
     if (!parsed.users || !Array.isArray(parsed.users)) {
-      fs.writeFileSync(AUTH_FILE, JSON.stringify(defaultData, null, 2), "utf8");
-      return defaultData;
+      return inMemoryAuthData;
     }
     if (!parsed.sessions) parsed.sessions = {};
     if (!parsed.resetOtps) parsed.resetOtps = {};
+    inMemoryAuthData = parsed;
     return parsed;
   } catch (err) {
-    console.error("Failed to read admin-auth.json, resetting defaults:", err);
-    fs.writeFileSync(AUTH_FILE, JSON.stringify(defaultData, null, 2), "utf8");
-    return defaultData;
+    return inMemoryAuthData;
   }
 }
 
 function saveAuthData(data: AuthData) {
+  inMemoryAuthData = data;
   try {
     fs.writeFileSync(AUTH_FILE, JSON.stringify(data, null, 2), "utf8");
   } catch (err) {
-    console.error("Failed to save admin-auth.json:", err);
+    // Graceful on serverless read-only filesystem
   }
 }
 
@@ -99,6 +107,39 @@ function cleanExpired(data: AuthData) {
     if (data.resetOtps[email].expiresAt < now) {
       delete data.resetOtps[email];
     }
+  }
+}
+
+// Create a stateless signed token for serverless resilience
+function createSignedToken(payload: { userId: string; email: string; name: string; role: string; expiresAt: number }): string {
+  const dataStr = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const signature = crypto.createHmac("sha256", JWT_SECRET).update(dataStr).digest("base64url");
+  return `adm_sess_${dataStr}.${signature}`;
+}
+
+// Verify a stateless signed token
+function verifySignedToken(token: string): AdminUser | null {
+  if (!token.startsWith("adm_sess_")) return null;
+  const parts = token.slice("adm_sess_".length).split(".");
+  if (parts.length !== 2) return null;
+
+  const [dataStr, signature] = parts;
+  const expectedSignature = crypto.createHmac("sha256", JWT_SECRET).update(dataStr).digest("base64url");
+  if (signature !== expectedSignature) return null;
+
+  try {
+    const payload = JSON.parse(Buffer.from(dataStr, "base64url").toString("utf8"));
+    if (!payload || !payload.expiresAt || payload.expiresAt < Date.now()) {
+      return null;
+    }
+    return {
+      id: payload.userId,
+      email: payload.email,
+      name: payload.name,
+      role: payload.role,
+    };
+  } catch (e) {
+    return null;
   }
 }
 
@@ -122,13 +163,22 @@ export function authenticateAdmin(
   }
 
   // Create session token valid for 7 days
-  const token = `adm_token_${crypto.randomBytes(24).toString("hex")}`;
   const sevenDays = 7 * 24 * 60 * 60 * 1000;
+  const expiresAt = Date.now() + sevenDays;
+
+  // Stateless signed token (works across any Vercel serverless lambda container)
+  const token = createSignedToken({
+    userId: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    expiresAt,
+  });
 
   data.sessions[token] = {
     userId: user.id,
     email: user.email,
-    expiresAt: Date.now() + sevenDays,
+    expiresAt,
   };
 
   saveAuthData(data);
@@ -144,9 +194,15 @@ export function authenticateAdmin(
   };
 }
 
-// 2. Verify Session Token
+// 2. Verify Session Token (checks stateless signature first, then file session)
 export function verifySessionToken(token: string): AdminUser | null {
   if (!token) return null;
+
+  // Fast-path: Check stateless signed token
+  const signedUser = verifySignedToken(token);
+  if (signedUser) return signedUser;
+
+  // Fallback: Check file sessions
   const data = ensureAuthFile();
   cleanExpired(data);
 
@@ -218,7 +274,7 @@ export function generatePasswordResetOtp(emailInput: string): {
 }
 
 // 5. Verify OTP and Update Admin Password
-export function verifyOtpAndResetPassword(
+export function resetAdminPasswordWithOtp(
   emailInput: string,
   otpInput: string,
   newPasswordInput: string
@@ -227,77 +283,61 @@ export function verifyOtpAndResetPassword(
   cleanExpired(data);
 
   const cleanEmail = emailInput.trim().toLowerCase();
-  const cleanOtp = otpInput.trim();
+  const otpRecord = data.resetOtps[cleanEmail];
 
-  if (!newPasswordInput || newPasswordInput.trim().length < 6) {
+  if (!otpRecord) {
     return {
       success: false,
-      error: "New password must be at least 6 characters in length.",
+      error: "No active password reset request found for this email, or the OTP has expired.",
     };
   }
 
-  const resetEntry = data.resetOtps[cleanEmail];
-  if (!resetEntry) {
+  if (otpRecord.otp !== otpInput.trim()) {
     return {
       success: false,
-      error: "No active password reset request found or the OTP has expired. Please request a new code.",
+      error: "Invalid 6-digit OTP code. Please verify the code entered.",
     };
   }
 
-  if (resetEntry.expiresAt < Date.now()) {
-    delete data.resetOtps[cleanEmail];
-    saveAuthData(data);
+  const user = data.users.find((u) => u.email.toLowerCase() === cleanEmail);
+  if (!user) {
     return {
       success: false,
-      error: "Your verification OTP has expired (valid for 15 minutes). Please generate a new code.",
+      error: "Admin user not found.",
     };
   }
 
-  if (resetEntry.otp !== cleanOtp) {
+  if (!newPasswordInput || newPasswordInput.trim().length < 8) {
     return {
       success: false,
-      error: "Incorrect verification code. Please check your email and try again.",
+      error: "New password must be at least 8 characters long.",
     };
   }
 
-  // Find user and update password hash
-  const userIndex = data.users.findIndex(
-    (u) => u.email.toLowerCase() === cleanEmail
-  );
-
-  if (userIndex === -1) {
-    return { success: false, error: "User account not found." };
-  }
-
-  data.users[userIndex].passwordHash = hashPassword(newPasswordInput);
-
-  // Clear OTP and invalidate previous sessions for safety
+  // Set new password
+  user.passwordHash = hashPassword(newPasswordInput);
   delete data.resetOtps[cleanEmail];
-  for (const token in data.sessions) {
-    if (data.sessions[token].email.toLowerCase() === cleanEmail) {
-      delete data.sessions[token];
-    }
-  }
+  data.sessions = {}; // Invalidate old sessions
 
   saveAuthData(data);
 
   return { success: true };
 }
 
-// 6. Verify Administrator Password
+export const verifyOtpAndResetPassword = resetAdminPasswordWithOtp;
+
+// 6. Verify Administrator Password Directly
 export function verifyAdminPassword(
-  emailOrUserId: string,
+  emailInput: string,
   passwordInput: string
 ): boolean {
-  if (!emailOrUserId || !passwordInput) return false;
   const data = ensureAuthFile();
+  const cleanEmail = emailInput.trim().toLowerCase();
   const inputHash = hashPassword(passwordInput);
-  const clean = emailOrUserId.trim().toLowerCase();
+
   const user = data.users.find(
-    (u) => u.email.toLowerCase() === clean || u.id === emailOrUserId
+    (u) => u.email.toLowerCase() === cleanEmail
   );
-  if (!user) return false;
-  return user.passwordHash === inputHash;
+
+  return Boolean(user && user.passwordHash === inputHash);
 }
-
-

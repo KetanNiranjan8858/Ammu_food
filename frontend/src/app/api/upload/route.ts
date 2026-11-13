@@ -7,9 +7,6 @@ export async function POST(req: NextRequest) {
     const contentType = req.headers.get("content-type") || "";
 
     const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await req.formData();
@@ -25,13 +22,23 @@ export async function POST(req: NextRequest) {
         const file = item as File;
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
+        const mimeType = file.type || "image/png";
 
         const cleanName = (file.name || "upload.png").replace(/[^a-zA-Z0-9.-]/g, "_");
         const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${cleanName}`;
         const filePath = path.join(uploadsDir, fileName);
 
-        fs.writeFileSync(filePath, buffer);
-        uploadedUrls.push(`/uploads/${fileName}`);
+        try {
+          if (!fs.existsSync(uploadsDir)) {
+            fs.mkdirSync(uploadsDir, { recursive: true });
+          }
+          fs.writeFileSync(filePath, buffer);
+          uploadedUrls.push(`/uploads/${fileName}`);
+        } catch (fsErr) {
+          // Vercel serverless read-only filesystem fallback: return base64 Data URI
+          const base64Url = `data:${mimeType};base64,${buffer.toString("base64")}`;
+          uploadedUrls.push(base64Url);
+        }
       }
 
       return NextResponse.json({
@@ -48,23 +55,33 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "No file data provided" }, { status: 400 });
       }
 
-      const base64Data = fileData.replace(/^data:image\/\w+;base64,/, "");
-      const buffer = Buffer.from(base64Data, "base64");
-
       const cleanName = origName.replace(/[^a-zA-Z0-9.-]/g, "_");
       const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${cleanName}`;
       const filePath = path.join(uploadsDir, fileName);
 
-      fs.writeFileSync(filePath, buffer);
-      return NextResponse.json({
-        success: true,
-        url: `/uploads/${fileName}`,
-        urls: [`/uploads/${fileName}`],
-      });
+      try {
+        if (!fs.existsSync(uploadsDir)) {
+          fs.mkdirSync(uploadsDir, { recursive: true });
+        }
+        const base64Data = fileData.replace(/^data:image\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64Data, "base64");
+        fs.writeFileSync(filePath, buffer);
+        return NextResponse.json({
+          success: true,
+          url: `/uploads/${fileName}`,
+          urls: [`/uploads/${fileName}`],
+        });
+      } catch (fsErr) {
+        // Return fileData base64 URL directly on serverless read-only filesystem
+        return NextResponse.json({
+          success: true,
+          url: fileData,
+          urls: [fileData],
+        });
+      }
     }
   } catch (err: any) {
     console.error("Upload handler error:", err);
     return NextResponse.json({ error: err.message || "Upload failed" }, { status: 500 });
   }
 }
-

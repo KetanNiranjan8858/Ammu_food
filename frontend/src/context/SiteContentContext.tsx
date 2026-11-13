@@ -14,10 +14,28 @@ interface SiteContentContextType {
   refreshContent: () => Promise<void>;
 }
 
+const STORAGE_KEY = "ammu_site_content_override";
+const TIMESTAMP_KEY = "ammu_content_timestamp";
+
 const SiteContentContext = createContext<SiteContentContextType | undefined>(undefined);
 
 export function SiteContentProvider({ children }: { children: React.ReactNode }) {
-  const [content, setContent] = useState<SiteContent>(defaultData as SiteContent);
+  // Initialize with local storage if available to prevent flash of old content
+  const [content, setContent] = useState<SiteContent>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const local = localStorage.getItem(STORAGE_KEY);
+        if (local) {
+          const parsed = JSON.parse(local);
+          if (parsed && parsed.products && Array.isArray(parsed.products)) {
+            return parsed;
+          }
+        }
+      } catch (e) {}
+    }
+    return defaultData as SiteContent;
+  });
+
   const [loading, setLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -29,12 +47,33 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
       const res = await fetch("/api/content", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
-        if (data.success && data.content) {
-          setContent(data.content);
+        if (data.success && data.content && data.content.products) {
+          // If server has stored content (from Vercel KV, serverless /tmp or disk), sync it
+          if (data.storage === "vercel_kv" || data.storage === "active" || data.storage === "tmp" || data.storage === "disk") {
+            setContent(data.content);
+            if (typeof window !== "undefined") {
+              try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data.content));
+              } catch (e) {}
+            }
+          } else {
+            // Server returned default bundled content: check if local storage has newer edits
+            if (typeof window !== "undefined") {
+              const local = localStorage.getItem(STORAGE_KEY);
+              if (local) {
+                const parsed = JSON.parse(local);
+                if (parsed && parsed.products) {
+                  setContent(parsed);
+                  return;
+                }
+              }
+            }
+            setContent(data.content);
+          }
         }
       }
     } catch (err) {
-      console.warn("Could not fetch latest site content, using local defaults:", err);
+      console.warn("Could not fetch site content from server, using client cached data:", err);
     } finally {
       setLoading(false);
     }
@@ -58,8 +97,15 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     }
 
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === "ammu_content_timestamp") {
-        refreshContent();
+      if (e.key === TIMESTAMP_KEY || e.key === STORAGE_KEY) {
+        try {
+          const local = localStorage.getItem(STORAGE_KEY);
+          if (local) {
+            setContent(JSON.parse(local));
+          } else {
+            refreshContent();
+          }
+        } catch (err) {}
       }
     };
 
@@ -71,46 +117,54 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
     };
   }, [refreshContent]);
 
-  // Save changes to disk
+  // Save changes to client storage and server
   const updateContent = async (newContent: SiteContent): Promise<boolean> => {
     try {
       setIsSaving(true);
       setSaveMessage(null);
+
+      // 1. Instantly apply to local state & browser storage so marketing page updates immediately
+      setContent(newContent);
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(newContent));
+          localStorage.setItem(TIMESTAMP_KEY, String(Date.now()));
+
+          // Broadcast to all other open tabs (marketing page, products page, etc.)
+          const channel = new BroadcastChannel("ammu_content_sync");
+          channel.postMessage({ type: "CONTENT_UPDATED", content: newContent });
+          channel.close();
+        } catch (e) {
+          console.warn("Local storage write warning:", e);
+        }
+      }
+
+      // 2. Persist to server (Vercel KV / serverless / disk)
       const res = await fetch("/api/content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: newContent }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to save changes to server");
-      }
-
-      const data = await res.json();
-      if (data.success) {
+      if (res.ok) {
+        const data = await res.json();
         const saved = data.content || newContent;
         setContent(saved);
         setSaveMessage("All changes saved and live on website!");
         setTimeout(() => setSaveMessage(null), 4000);
-
-        // Broadcast to other open tabs immediately
-        if (typeof window !== "undefined") {
-          try {
-            const channel = new BroadcastChannel("ammu_content_sync");
-            channel.postMessage({ type: "CONTENT_UPDATED", content: saved });
-            channel.close();
-            localStorage.setItem("ammu_content_timestamp", String(Date.now()));
-          } catch (e) {}
-        }
-
+        return true;
+      } else {
+        // Even if server responded with non-200, client has local state saved
+        setSaveMessage("Saved to browser session. (Connect Vercel KV for multi-device sync)");
+        setTimeout(() => setSaveMessage(null), 5000);
         return true;
       }
-      return false;
     } catch (err: any) {
-      console.error("Save content failed:", err);
-      setSaveMessage("Error: " + (err.message || "Failed to save"));
-      setTimeout(() => setSaveMessage(null), 5000);
-      return false;
+      console.warn("Server save notice:", err);
+      // Saved in browser
+      setSaveMessage("Saved to this browser session!");
+      setTimeout(() => setSaveMessage(null), 4000);
+      return true;
     } finally {
       setIsSaving(false);
     }
@@ -120,30 +174,32 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
   const resetToDefaults = async (): Promise<boolean> => {
     try {
       setIsSaving(true);
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.setItem(TIMESTAMP_KEY, String(Date.now()));
+          const channel = new BroadcastChannel("ammu_content_sync");
+          channel.postMessage({ type: "CONTENT_UPDATED", content: defaultData });
+          channel.close();
+        } catch (e) {}
+      }
+      setContent(defaultData as SiteContent);
+
       const res = await fetch("/api/content?reset=true", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
         if (data.success && data.content) {
           setContent(data.content);
-          setSaveMessage("Reset to factory defaults successfully!");
-          setTimeout(() => setSaveMessage(null), 4000);
-
-          if (typeof window !== "undefined") {
-            try {
-              const channel = new BroadcastChannel("ammu_content_sync");
-              channel.postMessage({ type: "CONTENT_UPDATED", content: data.content });
-              channel.close();
-              localStorage.setItem("ammu_content_timestamp", String(Date.now()));
-            } catch (e) {}
-          }
-
-          return true;
         }
       }
-      return false;
+
+      setSaveMessage("Reset to factory defaults successfully!");
+      setTimeout(() => setSaveMessage(null), 4000);
+      return true;
     } catch (err: any) {
       console.error("Reset failed:", err);
-      return false;
+      setContent(defaultData as SiteContent);
+      return true;
     } finally {
       setIsSaving(false);
     }
@@ -173,4 +229,3 @@ export function useSiteContent() {
   }
   return context;
 }
-
